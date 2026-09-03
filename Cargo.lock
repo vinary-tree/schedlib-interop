@@ -73,7 +73,7 @@ checksum = "61abc5471667da6d32441f91dc7cab24afb4dfef5c76e6dff5a478d13c66bdc5"
 [[package]]
 name = "schedlib"
 version = "0.1.0"
-source = "git+https://github.com/vinary-tree/schedlib?rev=b015bd1d494fb4f247983ada64b0402f56bea1fe#b015bd1d494fb4f247983ada64b0402f56bea1fe"
+source = "git+https://github.com/vinary-tree/schedlib?rev=ca65f4a3e6153b4cf07d39ac539571b1448ad87c#ca65f4a3e6153b4cf07d39ac539571b1448ad87c"
 dependencies = [
  "libvgraph",
 ]

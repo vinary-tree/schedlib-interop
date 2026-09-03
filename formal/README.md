@@ -4,10 +4,10 @@
 
 The formal layer fixes the interoperability semantics before codec
 implementation. Its source boundary is schedlib commit
-`b015bd1d494fb4f247983ada64b0402f56bea1fe`, recorded in
-[`source.commit`](source.commit). The implementation may request additional
-borrowed semantic views from schedlib, but it may not change the durable
-protocol described by that commit.
+`ca65f4a3e6153b4cf07d39ac539571b1448ad87c`, recorded in
+[`source.commit`](source.commit). That revision provides the borrowed semantic
+views and checked event-kind reconstruction boundary required by the codec. The
+implementation may not change the durable protocol described by that commit.
 
 ## Evidence ladder
 

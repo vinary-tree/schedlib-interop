@@ -32,11 +32,11 @@ The fixed 112-byte header is:
 | 96 | 8 | semantic-profile byte length |
 | 104 | 8 | payload byte length |
 
-The payload begins with the exact UTF-8 semantic profile. Each task then
-contains a 64-bit key length, exact key bytes, a 32-bit read count followed by
-64-bit resource identifiers, a 32-bit write count followed by identifiers, and
-a 64-bit cost. The final dependency section contains sorted unique pairs of
-32-bit dense task identifiers.
+The payload begins with the 64-bit plan budget followed by the exact UTF-8
+semantic profile. Each task then contains a 64-bit key length, exact key bytes,
+a 32-bit read count followed by 64-bit resource identifiers, a 32-bit write
+count followed by identifiers, and a 64-bit cost. The final dependency section
+contains sorted unique pairs of 32-bit dense task identifiers.
 
 Task order is schedlib's canonical key order. Read and write sets are strictly
 increasing. Dependencies are lexicographically increasing. The header totals,
