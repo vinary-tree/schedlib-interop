@@ -1,0 +1,49 @@
+[package]
+name = "schedlib-interop"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+authors = ["Dylon Edwards <dylon@f1r3fly.io>"]
+description = "Canonical bounded plan and checkpoint codecs for schedlib"
+license = "Apache-2.0"
+repository = "https://github.com/vinary-tree/schedlib-interop"
+homepage = "https://github.com/vinary-tree/schedlib-interop"
+documentation = "https://docs.rs/schedlib-interop"
+readme = "README.md"
+publish = ["crates-io"]
+keywords = ["scheduling", "checkpoint", "serialization", "digest", "stack-safe"]
+categories = ["encoding", "algorithms", "concurrency"]
+include = [
+    "/.github/**",
+    "/src/**",
+    "/tests/**",
+    "/examples/**",
+    "/benches/**",
+    "/docs/**",
+    "/formal/**",
+    "/scripts/**",
+    "/Cargo.toml",
+    "/Cargo.lock",
+    "/Makefile",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/CONTRIBUTING.md",
+    "/SECURITY.md",
+    "/LICENSE",
+]
+
+[dependencies]
+blake3 = "=1.8.7"
+schedlib = { version = "=0.1.0", git = "https://github.com/vinary-tree/schedlib", rev = "b015bd1d494fb4f247983ada64b0402f56bea1fe" }
+
+[workspace]
+members = ["."]
+resolver = "2"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "deny"
+pedantic = "deny"
+unwrap_used = "deny"
