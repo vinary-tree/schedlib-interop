@@ -99,6 +99,11 @@ These checks make accidental noncanonical or noninjective adapters fail closed.
 The codec identity prevents interpreting the same bytes under a different key
 domain.
 
+The built-in `U64KeyCodec` writes exactly eight big-endian bytes, preserving
+numeric order lexicographically. Its version-one identity is the 32 ASCII bytes
+`vinary/u64-big-endian/key/v1!!!!`. A future change to width, byte order,
+admission, or meaning requires a new identity.
+
 ## Admission machine
 
 The decoder performs these phases iteratively:

@@ -1,0 +1,59 @@
+@startuml
+title Bounded canonical admission pipeline
+
+skinparam backgroundColor #F8FAFC
+skinparam shadowing false
+skinparam ArrowColor #334155
+skinparam sequence {
+  LifeLineBorderColor #475569
+  LifeLineBackgroundColor #F8FAFC
+  GroupBorderColor #7C3AED
+  GroupBackgroundColor #F5F3FF
+  GroupHeaderFontColor #4C1D95
+}
+
+actor Caller #FCE7F3
+participant "Header + limit\nadmission" as Admission #FEF3C7
+participant "Allocation-free\ncanonical scan" as Scan #DBEAFE
+participant "Exact output\nconstruction" as Construct #EDE9FE
+participant "schedlib semantic\nvalidation" as Core #DCFCE7
+
+Caller -> Admission : untrusted complete frame + limits
+Admission -> Admission : byte cap, fixed header, checked totals, work
+
+alt invalid header, overflow, limit, or cancellation
+  Admission --> Caller : typed rejection; no allocation or result
+else admitted fixed frame
+  Admission -> Scan : bounded payload slice
+  Scan -> Scan : forward cursors validate lengths and order
+  alt malformed or noncanonical payload
+    Scan --> Caller : typed rejection; no semantic object
+  else complete valid scan
+    Scan -> Construct : exact capacities and validated slices
+    Construct -> Construct : decode keys and populate flat vectors
+    alt key codec violation
+      Construct --> Caller : typed rejection; no partial result
+    else canonical values
+      Construct -> Core : plan fields or checkpoint event kinds
+      Core -> Core : construct and validate exact semantics
+      alt foreign active plan or corrupt checkpoint
+        Core --> Caller : typed rejection; no publication
+      else exact semantic value
+        Core -> Admission : complete unpublished value
+        Admission -> Admission : final cancellation sample
+        Admission --> Caller : publish exactly one complete value + metrics
+      end
+    end
+  end
+end
+
+note over Admission,Scan #FEF3C7
+No variable output allocation occurs before complete
+header, item, work, cancellation, and scan admission.
+end note
+
+note over Construct,Core #DCFCE7
+Digests aid integrity only. Exact structural equality
+remains the checkpoint acceptance authority.
+end note
+@enduml

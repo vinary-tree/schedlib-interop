@@ -7,8 +7,10 @@ log_directory="$evidence_directory/logs"
 temporary_directory="$evidence_directory/tmp"
 coq_directory="$evidence_directory/coq-integrated"
 cargo_directory="$evidence_directory/cargo"
+cargo_home_directory="$repository_root/target/cargo-home"
 
-mkdir -p "$log_directory" "$temporary_directory" "$coq_directory" "$cargo_directory"
+mkdir -p "$log_directory" "$temporary_directory" "$coq_directory" "$cargo_directory" \
+  "$cargo_home_directory"
 
 if [[ "${SCHEDLIB_INTEROP_FORMAL_SCOPED:-0}" != "1" ]]; then
   exec systemd-run --user --scope \
@@ -18,6 +20,7 @@ if [[ "${SCHEDLIB_INTEROP_FORMAL_SCOPED:-0}" != "1" ]]; then
     -p TasksMax=64 \
     --setenv=SCHEDLIB_INTEROP_FORMAL_SCOPED=1 \
     --setenv=CARGO_BUILD_JOBS=1 \
+    --setenv=CARGO_HOME="$cargo_home_directory" \
     --setenv=CARGO_TARGET_DIR="$cargo_directory" \
     --setenv=TMPDIR="$temporary_directory" \
     --setenv=JAVA_TOOL_OPTIONS="-Xmx1024m -XX:+UseParallelGC -Djava.awt.headless=true -Djava.io.tmpdir=$temporary_directory" \
@@ -25,6 +28,7 @@ if [[ "${SCHEDLIB_INTEROP_FORMAL_SCOPED:-0}" != "1" ]]; then
 fi
 
 export CARGO_BUILD_JOBS=1
+export CARGO_HOME="$cargo_home_directory"
 export CARGO_TARGET_DIR="$cargo_directory"
 export TMPDIR="$temporary_directory"
 export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS:--Xmx1024m -XX:+UseParallelGC -Djava.awt.headless=true -Djava.io.tmpdir=$temporary_directory}"
