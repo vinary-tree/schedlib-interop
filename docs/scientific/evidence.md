@@ -33,6 +33,12 @@ memory-backed temporary storage.
 
 ## Reproducibility
 
+The accepted production refinement is commit
+`269d8d137717c7c0a53e9418c5d52e8366967783`. All forty invariant-ledger rows
+name that exact commit. The complete post-implementation formal transcript has
+SHA-256
+`4e6413ef0d344a661fac51338ee228f85d8cd2303f13bc17aa5ae8c7853656a8`.
+
 Validation output is captured before inspection. Formal model metadata,
 compiler targets, and logs live below `target/verification/`; Rust acceptance
 logs live below `target/acceptance/`; documentation evidence lives below

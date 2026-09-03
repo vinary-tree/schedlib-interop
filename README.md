@@ -8,8 +8,9 @@ scheduling kernel.
 
 ## Current verification state
 
-The production codec implements the previously frozen forty-row contract. The
-contract fixes forty independently traceable
+The production codec at commit
+`269d8d137717c7c0a53e9418c5d52e8366967783` implements the previously frozen
+forty-row contract. The contract fixes forty independently traceable
 obligations spanning the wire grammar, checked admission, canonicality, exact
 plan comparison, key-codec laws, checkpoint reconstruction, digest separation,
 replay refinement, constant native stack, and linear resource use.
@@ -22,6 +23,7 @@ make verify-formal
 
 The theorem checkers, bounded models, executable oracles, causal mutants, and
 production Rust properties must all pass without weakening their assertions.
+Every ledger row is accepted against that exact implementation commit.
 
 ## Architectural boundary
 

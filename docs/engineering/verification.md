@@ -57,3 +57,9 @@ causal mutants, and the frozen Rust contract. The Rust gate checks formatting,
 the Rust 1.85 minimum supported version, strict Clippy, debug and release
 tests, examples, doctests, rustdoc, and packaging. The documentation gate
 renders PlantUML headlessly and runs `vinary-doc-lint` in check-only mode.
+
+Cargo normalizes the Git-pinned schedlib dependency to the declared registry
+version while preparing a publishable archive. Therefore the release sequence
+is strict: publish schedlib 0.1.0 first, then run the schedlib-interop package
+gate and publish schedlib-interop. A missing registry dependency is a release
+failure, never a skipped package check.
