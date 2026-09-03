@@ -4,10 +4,11 @@
 
 The formal layer fixes the interoperability semantics before codec
 implementation. Its source boundary is schedlib commit
-`b015bd1d494fb4f247983ada64b0402f56bea1fe`, recorded in
-[`source.commit`](source.commit). The implementation may request additional
-borrowed semantic views from schedlib, but it may not change the durable
-protocol described by that commit.
+`24a45ea90f33a616eb260207b9cf765e579e7a34`, recorded in
+[`source.commit`](source.commit). That revision provides the borrowed semantic
+views, checked event-kind reconstruction, and explicit checkpoint-integrity
+validation required by the codec. The implementation may not change the
+durable protocol described by that commit.
 
 ## Evidence ladder
 
@@ -33,6 +34,13 @@ rejects mixed states. After the complete Rust suite passes against production,
 all rows change together to `accepted@COMMIT`, where `COMMIT` is a full
 forty-hexadecimal implementation commit that resolves locally. Merely editing
 formal artifacts cannot satisfy this transition.
+
+The current ledger binds all forty rows to implementation commit
+`269d8d137717c7c0a53e9418c5d52e8366967783`. The post-implementation gate
+accepted forty closed Rocq obligations, seven TLA+ configurations, the expected
+thirty-nine unsatisfiable and three satisfiable SMT controls, 115,308
+independent oracle cases, forty causal mutants, and forty frozen Rust
+properties.
 
 ## Resource discipline
 

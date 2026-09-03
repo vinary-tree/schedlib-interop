@@ -34,7 +34,10 @@ include = [
 
 [dependencies]
 blake3 = "=1.8.7"
-schedlib = { version = "=0.1.0", git = "https://github.com/vinary-tree/schedlib", rev = "b015bd1d494fb4f247983ada64b0402f56bea1fe" }
+schedlib = { version = "=0.1.0", git = "https://github.com/vinary-tree/schedlib", rev = "24a45ea90f33a616eb260207b9cf765e579e7a34" }
+
+[dev-dependencies]
+proptest = { version = "=1.11.0", default-features = false, features = ["std"] }
 
 [workspace]
 members = ["."]
