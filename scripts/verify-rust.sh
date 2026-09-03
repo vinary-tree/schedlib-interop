@@ -51,4 +51,4 @@ run_gate cargo-test-release cargo test --locked --all-targets --release
 run_gate cargo-run-example cargo run --locked --release --example canonical_roundtrip
 run_gate cargo-test-doc cargo test --locked --doc
 run_gate cargo-doc env RUSTDOCFLAGS="-D warnings" cargo doc --locked --no-deps
-run_gate cargo-package cargo package --locked --allow-dirty --no-verify
+run_gate cargo-package cargo package --locked --allow-dirty
